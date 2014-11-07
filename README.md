@@ -45,6 +45,8 @@ List found CVEs
 
 `from date` (optional) syntax: `YYYY-MM-DD` or `YYYY-MM` or `YYYY`
 
+Example: `vutr list 2014-11`
+
 
 ### License
 
