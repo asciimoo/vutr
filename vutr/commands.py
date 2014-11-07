@@ -1,4 +1,5 @@
 import click
+from operator import itemgetter
 from os.path import expanduser
 from .core import (add_keyword,
                    update_cves,
@@ -32,7 +33,8 @@ def add(keyword, regex, data_file):
               default=DATA_FILE_PATH)
 def list_keywords(data_file, from_date):
     """List keywords"""
-    for cve in list_cves(data_file, from_date):
+    for cve in sorted(list_cves(data_file, from_date),
+                      key=itemgetter('date')):
         click.echo('{3}\t{1}\t{2}\t{0}'.format(cve['keyword'],
                                                cve_url(cve['id']),
                                                cve['score'],
