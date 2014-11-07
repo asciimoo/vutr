@@ -26,7 +26,7 @@ CVEDETAILS_FEED_URL = 'http://www.cvedetails.com/json-feed.php'\
 
 
 def get_cves():
-    return json.loads(get(CVEDETAILS_FEED_URL).text)
+    return get(CVEDETAILS_FEED_URL).json()
 
 
 def load_keywords(keyword_file_path, compile_regex=False):
