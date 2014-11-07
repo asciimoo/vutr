@@ -89,5 +89,18 @@ def update_cves(keyword_file_path):
     save_keywords(keywords, keyword_file_path)
 
 
+def list_cves(data_file, from_date=None):
+    """List keywords"""
+    keywords = load_keywords(data_file)
+    for keyword, keyword_data in keywords.items():
+        for cve, cve_details in keyword_data['cves'].items():
+            if (not from_date
+                or (cve_details['date'] >= from_date
+                    or cve_details['date'].startswith(from_date))):
+                cve_details['id'] = cve
+                cve_details['keyword'] = keyword
+                yield cve_details
+
+
 def cve_url(cve):
     return 'http://www.cvedetails.com/cve/{0}/'.format(cve)

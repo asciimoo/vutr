@@ -1,6 +1,9 @@
 import click
 from os.path import expanduser
-from .core import add_keyword, load_keywords, update_cves, cve_url
+from .core import (add_keyword,
+                   update_cves,
+                   list_cves,
+                   cve_url)
 
 DATA_FILE_PATH = expanduser('~/.vutr_data.json')
 
@@ -23,22 +26,17 @@ def add(keyword, regex, data_file):
 
 
 @cli.command("list")
-@click.argument('from_date', default=None)
+@click.argument('from_date', default="")
 @click.option('-f', '--data-file',
               type=click.Path(readable=True),
               default=DATA_FILE_PATH)
-def list_keywords(data_file, from_date=None):
+def list_keywords(data_file, from_date):
     """List keywords"""
-    keywords = load_keywords(data_file)
-    for keyword, keyword_data in keywords.items():
-        for cve, cve_details in keyword_data['cves'].items():
-            if (not from_date
-                or (cve_details['date'] >= from_date
-                    or cve_details['date'].startswith(from_date))):
-                click.echo('{3}\t{1}\t{2}\t{0}'.format(keyword,
-                                                       cve_url(cve),
-                                                       cve_details['score'],
-                                                       cve_details['date']))
+    for cve in list_cves(data_file, from_date):
+        click.echo('{3}\t{1}\t{2}\t{0}'.format(cve['keyword'],
+                                               cve_url(cve['id']),
+                                               cve['score'],
+                                               cve['date']))
 
 
 @cli.command("update")
