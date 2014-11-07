@@ -21,7 +21,7 @@ def cli():
               type=click.Path(writable=True),
               default=DATA_FILE_PATH)
 def add(keyword, regex, data_file):
-    """Add new keyword/regex pair"""
+    """Add new keyword/pattern pair"""
     add_keyword(keyword, regex, data_file)
     click.echo('[!] keyword "{0}" added'.format(keyword))
 
