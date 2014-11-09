@@ -67,7 +67,9 @@ def add_keyword(name, regex, keyword_file_path):
 
 
 def add_cve(cve, keyword_data):
-    cve_data = {'date': cve['publish_date'], 'score': cve['cvss_score']}
+    cve_data = {'date': cve['publish_date'],
+                'score': cve['cvss_score'],
+                'description': cve['summary']}
     keyword_data['cves'][cve['cve_id']] = cve_data
 
 
