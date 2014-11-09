@@ -35,10 +35,12 @@ def list_keywords(data_file, from_date):
     """List keywords"""
     for cve in sorted(list_cves(data_file, from_date),
                       key=itemgetter('date')):
-        click.echo('{3}\t{1}\t{2}\t{0}'.format(cve['keyword'],
-                                               cve_url(cve['id']),
-                                               cve['score'],
-                                               cve['date']))
+        click.echo('{0} {2} ({1})\n{3}\n{4}\n{5}\n'.format(cve['keyword'],
+                                                           cve['score'],
+                                                           cve['date'],
+                                                           cve['id'],
+                                                           cve_url(cve['id']),
+                                                           cve['description']))
 
 
 @cli.command("update")
