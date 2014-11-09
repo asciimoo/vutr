@@ -18,7 +18,7 @@ $ pip install vutr
 ### Commands
 
 
-#### vutr add <keyword> <pattern>
+#### vutr add `<keyword>` `<pattern>`
 
 Add new keyword and regular expression pattern
 
@@ -39,7 +39,7 @@ Typically used from cron
 Example hourly crontab: `37 * * * * vutr update >> /tmp/vutr.log`
 
 
-#### vutr list [from date]
+#### vutr list `[from date]`
 
 List found CVEs
 
