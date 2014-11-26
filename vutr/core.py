@@ -80,10 +80,10 @@ def update_cves(keyword_file_path):
             if cve['cve_id'] in keyword_data['cves']:
                 continue
             if keyword_data['re'].findall(cve['summary']):
-                print("{0} ({2}) match with {1}".format(cve['cve_id'],
-                                                        keyword,
-                                                        cve['cvss_score']))
-                print(cve['summary'])
+                print("{1}\t{0}\t{2}\t{3}".format(cve['cve_id'],
+                                                  keyword,
+                                                  cve['cvss_score'],
+                                                  cve_url(cve['cve_id'])))
                 add_cve(cve, keyword_data)
 
     save_keywords(keywords, keyword_file_path)
