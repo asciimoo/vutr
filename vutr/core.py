@@ -60,6 +60,9 @@ def add_keyword(name, regex, keyword_file_path):
         keywords = load_keywords(keyword_file_path)
     except:
         keywords = {}
+
+    # test if paramter is a valid regex
+    re.compile(regex)
     keywords[name] = create_keyword(regex)
     save_keywords(keywords, keyword_file_path)
 

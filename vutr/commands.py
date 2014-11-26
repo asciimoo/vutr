@@ -1,4 +1,5 @@
 import click
+from sre_constants import error as regex_error
 from operator import itemgetter
 from os.path import expanduser
 from .core import (add_keyword,
@@ -22,8 +23,14 @@ def cli():
               default=DATA_FILE_PATH)
 def add(keyword, regex, data_file):
     """Add new keyword/pattern pair"""
-    add_keyword(keyword, regex, data_file)
-    click.echo('[!] keyword "{0}" added'.format(keyword))
+    try:
+        add_keyword(keyword, regex, data_file)
+    except regex_error, e:
+        click.echo('[!] regex error: {0}'.format(e.message))
+    except Exception, e:
+        click.echo('[!] failed to add keyword: {0}'.format(e.message))
+    else:
+        click.echo('[!] keyword "{0}" added'.format(keyword))
 
 
 @cli.command("list")
