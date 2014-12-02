@@ -53,10 +53,10 @@ def list_keywords(data_file, from_date):
 
 @cli.command("update")
 @click.option('-c', '--config-file',
-              type=click.Path(writable=True, readable=True),
+              type=click.Path(readable=True),
               default=CONFIG_FILE_PATH)
 @click.option('-d', '--data-file',
-              type=click.Path(readable=True),
+              type=click.Path(writable=True),
               default=DATA_FILE_PATH)
 def update(config_file, data_file):
     """Check new CVEs"""
