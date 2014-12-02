@@ -8,6 +8,7 @@ from .core import (add_keyword,
                    cve_url)
 
 DATA_FILE_PATH = expanduser('~/.vutr_data.json')
+CONFIG_FILE_PATH = expanduser('~/.vutrrc.json')
 
 
 @click.group()
@@ -18,13 +19,13 @@ def cli():
 @cli.command("add")
 @click.argument('keyword')
 @click.argument('regex')
-@click.option('-f', '--data-file',
+@click.option('-c', '--config-file',
               type=click.Path(writable=True),
-              default=DATA_FILE_PATH)
-def add(keyword, regex, data_file):
+              default=CONFIG_FILE_PATH)
+def add(keyword, regex, config_file):
     """Add new keyword/pattern pair"""
     try:
-        add_keyword(keyword, regex, data_file)
+        add_keyword(keyword, regex, config_file)
     except regex_error, e:
         click.echo('[!] regex error: {0}'.format(e.message))
     except Exception, e:
@@ -35,7 +36,7 @@ def add(keyword, regex, data_file):
 
 @cli.command("list")
 @click.argument('from_date', default="")
-@click.option('-f', '--data-file',
+@click.option('-d', '--data-file',
               type=click.Path(readable=True),
               default=DATA_FILE_PATH)
 def list_keywords(data_file, from_date):
@@ -51,9 +52,12 @@ def list_keywords(data_file, from_date):
 
 
 @cli.command("update")
-@click.option('-f', '--data-file',
+@click.option('-c', '--config-file',
               type=click.Path(writable=True, readable=True),
+              default=CONFIG_FILE_PATH)
+@click.option('-d', '--data-file',
+              type=click.Path(readable=True),
               default=DATA_FILE_PATH)
-def update(data_file):
+def update(config_file, data_file):
     """Check new CVEs"""
-    update_cves(data_file)
+    update_cves(config_file, data_file)
