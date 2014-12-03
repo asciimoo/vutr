@@ -7,7 +7,7 @@ CVEDETAILS_FEED_URL = 'http://www.cvedetails.com/json-feed.php'\
     '&vendor_id=0'\
     '&product_id=0'\
     '&version_id=0'\
-    '&hasexp=1'\
+    '&hasexp=0'\
     '&opec=1'\
     '&opov=1'\
     '&opcsrf=1'\
@@ -23,6 +23,8 @@ CVEDETAILS_FEED_URL = 'http://www.cvedetails.com/json-feed.php'\
     '&opdos=1'\
     '&orderby=1'\
     '&cvssscoremin=0'
+
+print CVEDETAILS_FEED_URL
 
 
 def get_cves():
