@@ -24,8 +24,6 @@ CVEDETAILS_FEED_URL = 'http://www.cvedetails.com/json-feed.php'\
     '&orderby=1'\
     '&cvssscoremin=0'
 
-print CVEDETAILS_FEED_URL
-
 
 def get_cves():
     return get(CVEDETAILS_FEED_URL).json()
